@@ -1,8 +1,3 @@
-let startButton = document.getElementsByClassName('btn_reset');
+const startButton = document.querySelector('.btn__reset');
+const qwerty = document.querySelector('.qwerty').querySelectorAll('button');
 
-
-startButton.addEventListener('click', () => {
-
-    const overlay = document.getElementById("overlay").style.display = "none";
-
-});
