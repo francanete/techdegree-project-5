@@ -63,7 +63,8 @@ addPhraseToDisplay(phraseArray);
 
 
 function checkLetter(button) {
-    
+    let allLetters = document.querySelector('.letter li');
+    console.log(allLetters);
 }
 
 
