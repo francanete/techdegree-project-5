@@ -6,14 +6,65 @@ const phrase = document.querySelector('#phrase');
 let missed = 0;
 
 let phrases = [
-    'phrase number 1',
-    'phrase number 2',
-    'phrase number 3',
-    'phrase number 4',
-    'phrase number 5'
+    '1 This is a pet',
+    '2 This',
+    '3 This',
+    '4 This',
+    '5 This'
 ];
 
-const header = document.querySelector('.header');
+/**
+ * @param {arr} takes any array that stores a string.
+ * @returns {array} array of characters
+ */
+
+function getRandomPhaseAsArray(arr){
+    let randomPhrase = Math.floor(Math.random() *arr.length);
+    let charactersArray = arr[randomPhrase].split('');
+    console.log(charactersArray);
+    return charactersArray;
+}
+
+
+const phraseList = document.querySelector('#phrase ul');
+
+/*
+*    function addPhraseToDisplay(arr) -  Takes any array and create an il element, then appends it to '#phrase ul'
+ */
+
+function addPhraseToDisplay(arr){
+    for (let i= 0; i<arr.length; i++) {
+        if(arr[i] !== ' ') {
+            let letter = document.createElement('li');
+            letter.className = "letter";
+            phraseList.appendChild(letter);
+            letter.innerHTML = arr[i];
+            console.log(letter) ;
+        } else {
+            let space = document.createElement('li');
+            space.className = "space";
+            phraseList.appendChild(space);
+            space.innerHTML = arr[i];
+        }
+    }
+}
+
+
+const phraseArray = getRandomPhaseAsArray(phrases);
+addPhraseToDisplay(phraseArray);
+
+
+
+/*
+ *     function checkLetter() - 
+ */
+
+
+function checkLetter(button) {
+   
+}
+
+
 
 
 
@@ -23,6 +74,5 @@ startButton.addEventListener('click', () => {
 
 
 keys.forEach( key => key.addEventListener('click', function () {
-    header.style.color = 'red';
     console.log(key);
 }));
