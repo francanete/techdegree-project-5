@@ -21,7 +21,7 @@ let phrases = [
 function getRandomPhaseAsArray(arr){
     let randomPhrase = Math.floor(Math.random() *arr.length);
     let charactersArray = arr[randomPhrase].split('');
-    console.log(charactersArray);
+    // console.log(charactersArray);
     return charactersArray;
 }
 
@@ -32,6 +32,7 @@ const phraseList = document.querySelector('#phrase ul');
 *    function addPhraseToDisplay(arr) -  Takes any array and create an il element, then appends it to '#phrase ul'
  */
 
+
 function addPhraseToDisplay(arr){
     for (let i= 0; i<arr.length; i++) {
         if(arr[i] !== ' ') {
@@ -39,7 +40,7 @@ function addPhraseToDisplay(arr){
             letter.className = "letter";
             phraseList.appendChild(letter);
             letter.innerHTML = arr[i];
-            console.log(letter) ;
+            console.log(letter);
         } else {
             let space = document.createElement('li');
             space.className = "space";
@@ -48,6 +49,7 @@ function addPhraseToDisplay(arr){
         }
     }
 }
+
 
 
 const phraseArray = getRandomPhaseAsArray(phrases);
@@ -61,7 +63,7 @@ addPhraseToDisplay(phraseArray);
 
 
 function checkLetter(button) {
-   
+    
 }
 
 
