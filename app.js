@@ -2,15 +2,16 @@ const startButton = document.querySelector('.btn__reset');
 const overlay = document.getElementById('overlay');
 const keys = document.querySelectorAll('button');
 const phrase = document.querySelector('#phrase');
+const heart = document.querySelectorAll('li > img');
 
 let missed = 0;
 
 let phrases = [
     '1 This is a pet',
-    '2 This',
-    '3 This',
-    '4 This',
-    '5 This'
+    '2 This is a pet',
+    '3 This is a pet',
+    '4 This is a pet',
+    '5 This is a pet'
 ];
 
 /**
@@ -40,7 +41,7 @@ function addPhraseToDisplay(arr){
             letter.className = "letter";
             phraseList.appendChild(letter);
             letter.innerHTML = arr[i];
-            console.log(letter);
+            // console.log(letter);
         } else {
             let space = document.createElement('li');
             space.className = "space";
@@ -63,11 +64,16 @@ addPhraseToDisplay(phraseArray);
 
 
 function checkLetter(button) {
-    let allLetters = document.querySelector('.letter li');
-    console.log(allLetters);
+    let allLetters = document.querySelectorAll('li.letter') && document.querySelectorAll("li:not(.show)");
+    let match = null;
+    for(let i = 0; i<allLetters.length; i++){
+        if( allLetters[i].textContent.toLowerCase() === button.textContent.toLowerCase()){
+            allLetters[i].className += " show";
+            match = allLetters[i];
+        }
+    } 
+    return match;
 }
-
-
 
 
 
@@ -77,5 +83,17 @@ startButton.addEventListener('click', () => {
 
 
 keys.forEach( key => key.addEventListener('click', function () {
-    console.log(key);
+    key.className += "chosen";
+    key.setAttribute('disabled', true);
+    let letterFound = checkLetter(key);
+    if(letterFound === null){
+        missed += 1;
+        for(let i = 0; i < heart.length; i++){
+            if( heart[i].src = "images/liveHeart.png" ){
+                heart[i].src = "images/lostHeart.png";
+            }
+        return;
+        }
+    }
 }));
+
