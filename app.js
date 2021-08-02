@@ -56,7 +56,7 @@ addPhraseToDisplay(phraseArray);
 
 
 /*
- *     function checkLetter() - 
+ *     function checkLetter() - check the letter from the button and compares it with the phrase to find a match.
  */
 
 
@@ -73,7 +73,8 @@ function checkLetter(button) {
 }
 
 /*
- *      function checkWin();   
+ *      function checkWin();   check the correct letters, if all letters in the prhase are correct is a winner.
+ *                             if the player misses 5 times, loses.
  */
 
 
@@ -98,7 +99,7 @@ function checkWin(){
 }
 
 /*
- *      function resetGame(); 
+ *      function resetGame();  reset the game. set the value missed to zero, unblock the keyboard and shows a new random phrase.
  */
 
 
