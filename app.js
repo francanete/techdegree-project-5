@@ -1,17 +1,19 @@
 const startButton = document.querySelector('.btn__reset');
 const overlay = document.getElementById('overlay');
-const keys = document.querySelectorAll('button');
+const keys = document.querySelectorAll('#qwerty button');
 const phrase = document.querySelector('#phrase');
 const heart = document.querySelectorAll('li > img');
+const title = document.querySelector('.title');
+const phraseList = document.querySelector('#phrase ul');
 
 let missed = 0;
 
 let phrases = [
-    '1 This is a pet',
-    '2 This is a pet',
-    '3 This is a pet',
-    '4 This is a pet',
-    '5 This is a pet'
+    'Pretty Woman',
+    'Sleeping with the enemy',
+    'Family man',
+    'Mamma mia',
+    'Crazy rich asians'
 ];
 
 /**
@@ -22,12 +24,9 @@ let phrases = [
 function getRandomPhaseAsArray(arr){
     let randomPhrase = Math.floor(Math.random() *arr.length);
     let charactersArray = arr[randomPhrase].split('');
-    // console.log(charactersArray);
     return charactersArray;
 }
 
-
-const phraseList = document.querySelector('#phrase ul');
 
 /*
 *    function addPhraseToDisplay(arr) -  Takes any array and create an il element, then appends it to '#phrase ul'
@@ -41,7 +40,6 @@ function addPhraseToDisplay(arr){
             letter.className = "letter";
             phraseList.appendChild(letter);
             letter.innerHTML = arr[i];
-            // console.log(letter);
         } else {
             let space = document.createElement('li');
             space.className = "space";
@@ -50,7 +48,6 @@ function addPhraseToDisplay(arr){
         }
     }
 }
-
 
 
 const phraseArray = getRandomPhaseAsArray(phrases);
@@ -75,7 +72,54 @@ function checkLetter(button) {
     return match;
 }
 
+/*
+ *      function checkWin();   
+ */
 
+
+function checkWin(){
+    let show = document.querySelectorAll('li.show')
+    let letter = document.querySelectorAll('li.letter')
+
+    if (missed >= 5){
+        overlay.style.display = 'flex';
+        overlay.className = 'lose';
+        title.textContent = 'Sorry, better luck next time';
+        startButton.textContent = 'Try Again';
+        resetGame();
+    }
+    if (show.length === letter.length){
+        overlay.className = 'win';
+        overlay.style.display = 'flex';
+        title.textContent = 'Well Done!';
+        startButton.textContent = 'Another Phrase?';
+        resetGame();
+    }
+}
+
+/*
+ *      function resetGame(); 
+ */
+
+
+function resetGame() {
+    missed = 0;
+    for (let i = 0; i < keys.length; i++ ) {
+		keys[i].disabled = false;
+		keys[i].classList.remove('chosen');
+	}
+    phraseList.innerHTML = '';
+    const newPhrase = getRandomPhaseAsArray(phrases);
+    addPhraseToDisplay(newPhrase);
+    for(let i = 0; i < heart.length; i++){
+        heart[i].src = "images/liveHeart.png";
+    }
+}
+
+
+/**
+ *   Event Listeners
+ */
 
 startButton.addEventListener('click', () => {
     overlay.style.display = 'none';
@@ -86,14 +130,9 @@ keys.forEach( key => key.addEventListener('click', function () {
     key.className += "chosen";
     key.setAttribute('disabled', true);
     let letterFound = checkLetter(key);
-    if(letterFound === null){
+    if(letterFound == null){
+        heart[missed].src = 'images/lostHeart.png';
         missed += 1;
-        for(let i = 0; i < heart.length; i++){
-            if( heart[i].src = "images/liveHeart.png" ){
-                heart[i].src = "images/lostHeart.png";
-            }
-        return;
-        }
     }
+    checkWin();
 }));
-
